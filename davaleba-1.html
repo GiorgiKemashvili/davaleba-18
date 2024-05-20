@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        /*error mesigistvis feris miniweba */
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <!-- Registraciis forma -->
+    <form id="registrationForm">
+        <!-- saxelis veli -->
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName">
+        <p id="firstNameError" class="error"></p>
+
+        <!-- gvaris veli -->
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName">
+        <p id="lastNameError" class="error"></p>
+
+        <!-- mail-is veli -->
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+        <p id="emailError" class="error"></p>
+
+        <!-- parolis veli -->
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <p id="passwordError" class="error"></p>
+
+        <!-- parolis velis dadastureba -->
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword">
+        <p id="confirmPasswordError" class="error"></p>
+
+        <!-- description veli -->
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" maxlength="100"></textarea>
+        <p id="descriptionError" class="error"></p>
+
+        <!-- ghilaki registraciistvis -->
+        <button type="button" onclick="validateForm()">Register</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            let isValid = true;
+
+            // sakhelis dadastureba
+            const firstName = document.getElementById('firstName').value;
+            const firstNameError = document.getElementById('firstNameError');
+            if (firstName.length < 6) {
+              // shetsdomis chveneba, tu sakheli 6 simboloze naklebia
+                firstNameError.textContent = 'First name must be at least 6 characters long.';
+                isValid = false;
+            } else {
+                firstNameError.textContent = '';
+            }
+
+            // gvaris shemowmeba
+            const lastName = document.getElementById('lastName').value;
+            const lastNameError = document.getElementById('lastNameError');
+            if (lastName.length < 6) {
+                // shetsdomis chveneba, tu gvari 6 simboloze naklebia
+                lastNameError.textContent = 'Last name must be at least 6 characters long.';
+                isValid = false;
+            } else {
+                lastNameError.textContent = '';
+            }
+
+            // Email-is dadastureba
+            const email = document.getElementById('email').value;
+            const emailError = document.getElementById('emailError');
+            // Regex elpostis dasadastureblad
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                // shecdomis chveneba, tu elposta arasworia
+                emailError.textContent = 'Please enter a valid email address.';
+                isValid = false;
+            } else {
+                emailError.textContent = '';
+            }
+
+            // parolis dadastureba
+            const password = document.getElementById('password').value;
+            const passwordError = document.getElementById('passwordError');
+            if (password.length < 6) {
+               // shetsdomis chveneba, tu paroli 6 simboloze naklebia
+                passwordError.textContent = 'Password must be at least 6 characters long.';
+                isValid = false;
+            } else {
+                passwordError.textContent = '';
+            }
+
+            // parolis shemowmeba
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const confirmPasswordError = document.getElementById('confirmPasswordError');
+            if (confirmPassword !== password) {
+                // shecdomis chveneba, tu paroli arasworia
+                confirmPasswordError.textContent = 'Passwords do not match.';
+                isValid = false;
+            } else {
+                confirmPasswordError.textContent = '';
+            }
+
+            // description agwera
+            const description = document.getElementById('description').value;
+            const descriptionError = document.getElementById('descriptionError');
+            if (description.length > 100) {
+                // shetsdomis chveneba, tu description 100 simboloze metia
+                descriptionError.textContent = 'Description must be 100 characters or less.';
+                isValid = false;
+            } else {
+                descriptionError.textContent = '';
+            }
+
+            // formis gagzavna tu kvela motxovna sworia
+            if (isValid) {
+                alert('Form submitted successfully!');
+                document.getElementById('registrationForm').submit();
+            }
+        }
+    </script>
+</body>
+</html>
