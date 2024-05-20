@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter and Output Objects</title>
+    <style>
+        .output-list {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- ghilaki filtraciis gasaaqtiureblad -->
+    <button type="button" onclick="filterAndOutput()">Filter and Output</button>
+
+    <!-- gafiltruli obieqtebis chvenebis sia -->
+    <ul id="outputList" class="output-list"></ul>
+
+    <script>
+        // 5 elementiani  masivis sheqmna
+        const peopleArray = [
+            { name: 'John', surname: 'Doe', age: 25, profession: 'Engineer' },
+            { name: 'Jane', surname: 'Smith', age: 17, profession: 'Student' },
+            { name: 'Emily', surname: 'Jones', age: 22, profession: 'Designer' },
+            { name: 'Michael', surname: 'Brown', age: 30, profession: 'Doctor' },
+            { name: 'Sarah', surname: 'Davis', age: 15, profession: 'Student' }
+        ];
+
+        function filterAndOutput() {
+            // 18 welze meti asakis adamianebistvis masivis gafiltvra
+            const filteredArray = peopleArray.filter(person => person.age > 18);
+
+            // migheba siis elementis 
+            const outputList = document.getElementById('outputList');
+            outputList.innerHTML = ''; 
+
+            // gafiltruli obiektebis li elementebis shignit gamotana
+            filteredArray.forEach(person => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `Name: ${person.name}, Surname: ${person.surname}, Age: ${person.age}, Profession: ${person.profession}`;
+                outputList.appendChild(listItem);
+            });
+        }
+    </script>
+</body>
+</html>
